@@ -1,0 +1,23 @@
+{% extends "registration/base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <div class="my-1">
+  <div class="p-2 text-center">
+    <div class="container">
+      <div class="rounded mx-auto d-block" style="max-width: 200px;">
+        <img src="{% static 'conf/img/enviado.png' %}" class="card-img-top" alt="...">
+     </div>  
+      <p class="col-lg-8 mx-auto lead">
+        <h1>
+            Registro completo con éxito. Se mandó un correo a la dirección ingresada. </br></br></br>
+            Por favor siga los pasos para activar su cuenta y poder ingresar al sistema.
+        </h1>
+        </p>
+    </div>
+  </div>
+</div>
+
+    
+{% endblock %}

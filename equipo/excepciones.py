@@ -1,0 +1,3 @@
+class PosicionNoIdentificadaEx(Exception):
+    pass
+

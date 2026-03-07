@@ -1,0 +1,114 @@
+{% extends "conf/base.html" %}
+{% block titulo_template %}Creación de jugadores desde archivo{% endblock %}  
+{% block title %}Creación de jugadores desde archivo {% endblock %}
+
+{% block content %}
+        
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Ver como se arma el archivo Excel
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+              <div class="accordion-body">
+                  <table class="table table-striped" style="    font-size: 10px;">
+                       <thead>
+                            <th scope="col">Codigo de equipo *</th>
+                            <th scope="col">Nombre completo *</th>
+                            <th scope="col">Posicion </th>
+                            <th scope="col">Fecha Nacimiento *</th>
+                            <th scope="col">Altura</th>
+                            <th scope="col">Pie</th>
+                            <th scope="col">Inicio contrato</th>
+                            <th scope="col">Fin contrato</th>
+                            <th scope="col">Valor mercado</th>
+                           </thead>
+                       <tbody>
+                            <tr>
+                               <td>1</td>
+                               <td>Juan Perez</td>
+                               <td>Delantero</td>
+                               <td>10/10/1996</td>
+                               <td>1.67</td>
+                               <td>Derecho</td>
+                               <td>01/01/2022</td>
+                               <td>01/01/2027</td>
+                               <td>1500000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Marquiños Perchman</td>
+                                <td>Defensa</td>
+                                <td>10/10/2000</td>
+                                <td>1.80</td>
+                                <td>Izquierdo</td>
+                                <td>01/01/2020</td>
+                                <td>01/07/2025</td>
+                                <td>500000</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Federico Martera </td>
+                                <td>Portero</td>
+                                <td>10/10/1996</td>
+                                <td>1.95</td>
+                                <td>Izquierdo</td>
+                                <td>01/10/2015</td>
+                                <td>01/01/2027</td>
+                                <td>1500000</td>
+                            </tr>
+                       </tbody>
+                   </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div>
+            {%if mensaje_carga%}
+                {%if not carga_realizada%}
+                <p style="font-size: 17px;color: red;text-align: center;
+                          background-color: white; padding: 10px;">
+                {%else%}
+                <p style="font-size: 17px;color: #289634;text-align: center;
+                          background-color: white; padding: 10px;">
+                
+                {%endif%}
+                    {{mensaje_carga}}</p>
+            {%endif%}
+          </div>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="container">
+                <div class="row">
+             
+                    <div class="col-sm-12">
+                        <table class="tablesorter" >
+                            <tr>
+                                <td style="padding-left: 30px;font-size: 17px;" colspan="2   ">Seleccione el archivo que desea cargar</td>
+                            
+                                <td><input style="margin:20px;" type="file" name="archivo"> </td>
+                            </tr>
+                         </table>
+                     </div>
+                     <div class="col-sm-2"></div>
+                     <div class="col-sm-8" style="text-align:center">
+                        <button  type="sumbit" name="validar_y_cargar" class="btn btn-success"  > Comenzar proceso de validación y carga</button>
+                     </div>
+                     <div class="col-sm-2"></div>
+ 
+                </div>
+            </div>
+            
+            
+        </form>
+        {%include 'equipo/importar_archivo_errores.html'%}
+        
+        
+{% endblock %}
+
+
+
+

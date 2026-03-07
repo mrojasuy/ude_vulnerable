@@ -1,0 +1,13 @@
+{% extends 'conf/base.html' %}
+{% block title %}Registro para directivo del equipo {{equipo}}{% endblock %}
+
+{% block titulo_template %}Registro para directivo del equipo {{equipo}}{% endblock %}
+
+{% block content %}
+    <form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
+                        
+        {%include 'conf/form_as_table_with_table.html'%}
+    
+        {% include 'conf/cancelar_confirmar.html' %}
+    </form>
+{% endblock %}

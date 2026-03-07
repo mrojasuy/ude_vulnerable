@@ -1,0 +1,165 @@
+[
+    {
+        "model": "equipo.equipo",
+        "pk": "1",
+        "fields": {
+          "nombre": "Peñarol",
+           "pais": "1",
+           "fecha_fundado": "1913-03-16",
+           "escudo": "escudos/penarol.png"
+        }
+    },
+    {
+        "model": "equipo.equipo",
+        "pk": "2",
+        "fields": {
+            "nombre": "Boston River",
+            "pais": "1",
+            "fecha_fundado": "1956-07-16",
+            "escudo": "escudos/boston_river.png"
+
+        }
+    },
+    {
+        "model": "equipo.equipo",
+        "pk": "3",
+        "fields": {
+            "nombre": "Nacional",
+            "pais": "1",
+            "fecha_fundado": "1950-09-01",
+            "escudo": "escudos/nacional.png"
+
+        }
+    },
+    {
+        "model": "equipo.equipo",
+        "pk": "4",
+        "fields": {
+            "nombre": "Liverpool FC",
+            "pais": "1",
+            "fecha_fundado": "1950-09-28",
+            "escudo": "escudos/liverpool.png"
+
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "5",
+        "fields": {
+          "nombre": "City Torque",
+          "pais": "1",
+            "fecha_fundado": "2007-09-02",
+            "escudo": "escudos/city_torque.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "6",
+        "fields": {
+            "nombre": "Defensor Sporting Club",
+            "pais": "1",
+            "fecha_fundado": "1929-05-28",
+            "escudo": "escudos/defensor.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "7",
+        "fields": {
+            "nombre": "C.A River Plate",
+            "pais": "1",
+            "fecha_fundado": "1989-12-02",
+            "escudo": "escudos/river.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "8",
+        "fields": {
+            "nombre": "Danubio FC",
+            "pais": "1",
+            "fecha_fundado": "1971-12-28",
+            "escudo": "escudos/danubio.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "9",
+        "fields": {
+            "nombre": "Montevideo Wanderers",
+            "pais": "1",
+            "fecha_fundado": "1910-09-28",
+            "escudo": "escudos/wanders.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "10",
+        "fields": {
+          "nombre": "Plaza Colonia",
+          "pais": "1",
+          "fecha_fundado": "1990-02-20",
+            "escudo": "escudos/plaza_colonia.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "11",
+        "fields": {
+          "nombre": "Deportivo Maldonado",
+          "pais": "1",
+            "fecha_fundado": "1971-07-29",
+            "escudo": "escudos/depo_maldonado.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "12",
+        "fields": {
+          "nombre": "Cerro Largo FC",
+          "pais": "1",
+          "fecha_fundado": "1945-09-28",
+            "escudo": "escudos/cerro_largo.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "13",
+        "fields": {
+          "nombre": "C.A Fénix",
+          "pais": "1",
+          "fecha_fundado": "1960-08-04",
+            "escudo": "escudos/fenix.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "14",
+        "fields": {
+          "nombre": "Racing Club de Montevideo",
+          "pais": "1",
+          "fecha_fundado": "1911-01-23",
+            "escudo": "escudos/racing.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "15",
+        "fields": {
+          "nombre": "La Luz Futbol Club",
+          "pais": "1",
+          "fecha_fundado": "2000-03-28",
+            "escudo": "escudos/laluz.png"
+        }
+    },
+{
+        "model": "equipo.equipo",
+        "pk": "16",
+        "fields": {
+          "nombre": "Club Atlético Cerro",
+          "pais": "1",
+          "fecha_fundado": "1923-09-14",
+          "escudo": "escudos/cerro.png"
+        }
+    }
+]

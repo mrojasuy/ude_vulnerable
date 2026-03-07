@@ -1,0 +1,19 @@
+{% extends "conf/base.html" %}
+{% block title %}Eliminación masiva de jugadores{% endblock %}
+{% block titulo_template %}Eliminación masiva de jugadores{% endblock %}
+
+{% block content %}
+<div class="my-5">
+  <div class="p-5 text-center bg-body-tertiary">
+    <div class="container py-5">
+        <p class="col-lg-8 mx-auto lead">
+            <h1>¿Estás seguro de que deseas eliminar todos los datos?</h1>
+        </p>
+        <a class="btn btn-danger" href="{{ url_cancelar }}" class="btn btn-secondary">Cancelar</a>
+        <a class="btn btn-success" href="{{ url_confirmar }}" class="btn btn-primary">Confirmar</a>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

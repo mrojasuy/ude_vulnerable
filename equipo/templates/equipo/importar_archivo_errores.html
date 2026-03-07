@@ -1,0 +1,15 @@
+
+{%if listado_errores%}
+    <div class="container">
+         <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10" style="text-align:left;background-color: #ffffff;">
+                <p style="color:black">Detalle de los errores detectados en la etapa de {{etapa}}.</p>
+			    {%for error in listado_errores%}
+			        <p style="color:red">{{ forloop.counter }} - {{error}}</p>
+			    {%endfor%}
+            </div>
+            <div class="col-sm-1"></div>
+        </div>
+    </div>
+{%endif%}

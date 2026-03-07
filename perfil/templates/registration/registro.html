@@ -1,0 +1,11 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+    <h3 class="titulo-barra">Formulario de registro para nuevo usuario</h3>
+    <form action="" method="post"  enctype="multipart/form-data">{% csrf_token %}
+                        
+        {%include 'conf/form_as_table_with_table.html'%}
+    
+        {% include 'conf/cancelar_confirmar.html' %}
+    </form>
+{% endblock %}

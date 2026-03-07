@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>Correo de activación</title>
+	</head>
+	<body>
+	    <p>¡Hola {{ nombre }} {{ apellido }}!</p>
+	    <p>Gracias por registrarte en nuestro sitio. Para activar tu cuenta, haz clic en el siguiente enlace:</p>
+	    <p><a href="{{ activation_url }}">Activar mi cuenta</a></p>
+	    <p>Si no puedes hacer clic en el enlace, cópialo y pégalo en la barra de direcciones de tu navegador:</p>
+	    <p>{{ activation_url }}</p>
+	    <p>Si no has solicitado este registro, puedes ignorar este correo.</p>
+	</body>
+</html>

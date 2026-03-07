@@ -1,0 +1,176 @@
+{% extends "conf/base.html" %}
+{% load static %}
+{% block title %}Datos del equipo: {{ object.nombre}} {% endblock %}
+
+{% block titulo_template %}Datos del equipo: {{ object.nombre}}{% endblock %}
+
+{% block content %}
+        <div class="row align-items-start">
+            <div class="col-lg-3" style="text-align: center;">
+                {%if equipo.escudo%}
+                    <img style="max-width: 150px;max-height: 250px;" src="{{object.escudo.url}}" class="card-img-top mx-auto" alt="{{object.nombre}}">
+                {%else %}
+                    <img class="mx-auto card-img-top" style="max-width: 150px;" src="{% static 'conf/img/sin_imagen_disponible.png' %}"  alt="...">
+                {%endif%}
+            </div>
+            <div class="col-lg-3">
+                <h1>Datos generales
+                {% if perms.usuario.add_dirigente %}
+                    <a href="{% url 'perfil:registro-directivo' object.pk %}">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    Registrar nuevo dirigente</a>
+                    </br>
+                {%endif%}
+                {% if perms.equipo.change_equipo  or es_dirigente%}
+                    <a  href="{% url 'equipo:equipo-editar' object.pk %}">
+                    <i style="color:#239eff" class="fa fa-edit" aria-hidden="true"> </i>
+                    Editar</a>
+                {%endif%}
+                {% comment %} el borrar no lo debería tener nadie {% endcomment %}
+                {% if perms.equipo.delete_equipo%}    
+                    <a  href="{% url 'equipo:equipo-eliminar' object.pk %}">
+                    <i style="color:#239eff" class="fa fa-trash" aria-hidden="true"> </i>
+                    Eliminar</a>
+                {%endif%}
+                
+                </h1>
+                <p><strong>Nombre:</strong> {{ object.nombre }}</p>
+                <p><strong>Pais:</strong> {{ object.get_pais_display }}</p>
+                <p><strong>Fundado el:</strong> {{ object.fecha_fundado|date:"SHORT_DATE_FORMAT"|default:" - " }}</p>
+            </div>
+           
+            <div class="col-lg-6">
+                <h1>Listado de titulos ganados
+                {% if perms.equipo.add_equipotrofeo or es_dirigente%}   
+                    <a href="{% url 'equipo:trofeo-crear' object.pk %}">
+                    <i class="fa fa-trophy" aria-hidden="true"></i>
+                    Registra nuevo titulo</a>
+                </h1>
+                {%endif%}
+                </br>
+                {%if object.get_trofeos%}
+                    <table class="table table-striped" style="font-size: 14px;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre del trofeo</th>
+                                <th scope="col">Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in object.get_trofeos %}
+                            <tr>
+                                <td>{{ item.get_trofeo_display|default:"-" }}</td>
+                                <td>{{ item.cantidad }}</td>
+                                
+                                {% comment %} si tiene el editar ya dejamos que elimine {% endcomment %}
+                                {% if perms.equipo.change_equipotrofeo or es_dirigente%} 
+                                <td>
+                                    <a href={% url 'equipo:trofeo-editar' item.pk %}>
+                                        <i style="color:#239eff" class="fa fa-edit" aria-hidden="true"> </i>
+                                    </a>
+                              
+                                   <a href={% url 'equipo:trofeo-eliminar' item.pk %}>
+                                        <i style="color:#ff574b" class="fa fa-trash" aria-hidden="true"> </i>
+                                    </a>
+                                </td>
+                                {%endif%}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {%else%}
+                
+                   <p style="color:red">
+                   <span titlle"asdasd" data-toggle='tooltip'></span>
+                   Aún no se han registrado titulos</p>
+                {%endif%}
+            </div>
+
+            <div class="col-lg-12" >
+                
+                <p><strong>Historia:</strong> </p>
+                <div style="max-height:80px; overflow-y: auto;">
+                    <code>
+                     {{ object.historia|default:" - "}}
+                    </code>
+                </div>
+            </div>
+            </br></br>
+            <h1>Plantel principal 
+            {% if perms.equipo.add_jugador%}
+                <a href="{% url 'equipo:jugador-crear' object.pk %}">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                Nuevo jugador</a>
+            
+            {%endif%}
+            </h1>
+            <form method="get" action="{% url 'equipo:equipo-detalle' object.pk %}">
+                <input style="width: 50%;height: 36px;" type="text" name="filtro_nombre" placeholder="Ingresar nombre y apellido">
+                <button type="submit" id="btn_buscar" class="btn btn-dark"><i class="fa fa-search" aria-hidden="true" style="margin-right:5px;"></i>Buscar</button>
+            </form>
+            {%if jugadores%}
+            <div style="max-height: 300px; overflow-y: auto;">
+            <table class="table table-striped" style="font-size: 15px;">
+                <thead>
+                    <tr>
+                        <th scope="col">Posición</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Fecha Nacimiento</th>
+                        <th scope="col">Altura</th>
+                        <th scope="col">Pie</th>
+                        <th scope="col">Inicio contrato</th>
+                        <th scope="col">Fin contrato</th>
+                        {%if es_dirigente %}
+                            <th scope="col">Valor mercado</th>
+                            <th scope="col">Salario</th>
+                            <th scope="col">Acciones</th>
+                        {%endif%}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for jugador in jugadores %}
+                    <tr>
+                        <td>{{ jugador.get_posicion_display|default:"-" }}</td>
+                        <td>{{ jugador.nombre_completo }}</td>
+                        <td>{{ jugador.fecha_nacimiento|date:"SHORT_DATE_FORMAT" }}</td>
+                        <td>{{ jugador.altura|default:"-"}}</td>
+                        <td>{{ jugador.get_pie_display|title}}</td>
+                        <td>{{ jugador.fichado|date:"SHORT_DATE_FORMAT"|default:"-" }}</td>
+                        <td>{{ jugador.fin_contrato|date:"SHORT_DATE_FORMAT"|default:"-" }}</td>
+                        {%if es_dirigente%}
+                            <td>{{ jugador.valor_mercado|floatformat:"2"|default:"-" }}</td>
+                            <td>{{ jugador.salario|floatformat:"2"|default:"-" }}</td>
+                        {%endif%}
+                        {%if es_dirigente%}
+                            <td>
+                                <a href={% url 'equipo:jugador-editar' jugador.pk %}>
+                                    <i style="color:#239eff" class="fa fa-edit" aria-hidden="true"> </i>
+                                </a>
+                          
+                               <a href={% url 'equipo:jugador-eliminar' jugador.pk %}>
+                                    <i style="color:#ff574b" class="fa fa-trash" aria-hidden="true"> </i>
+                                </a>
+                            </td>
+                        {%endif%}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {%else%}
+               <p style="color:red">Búsqueda sin resultados.</p>
+            {%endif%}
+            </div>
+              
+           
+        </div>
+{% endblock %}
+
+{% block js %}     
+    <script>
+        
+        AgregarAyudaAElementoSoloTexto("btn_buscar", 
+        "SQLi",
+        "Dentro del campo de buqueda de nombre de jugadores, se podría ingresar lo siguiente: silva'; Update equipo_equipo set nombre='nuevo nombre' where id = 'Id del equipo'; -- ; y si existe un equipo con id 2, se le actualizaría su nombre y pasaría a tener el valor de nuevo nombre",
+        true);
+    </script>
+{%endblock%}
