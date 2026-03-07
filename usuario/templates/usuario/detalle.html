@@ -1,0 +1,38 @@
+{% extends "conf/base.html" %}
+{% block title %}Datos del usuario {{ object.get_nombre_apellido}} {% endblock %}
+{% block titulo_template %}Datos del usuario: {{ object.get_nombre_apellido}}
+         
+{% endblock %}
+
+{% block content %}
+    <div class="container"> 
+        {%if object.es_hincha %} 
+            <a style="color:#5ec5ff;font-weight: bold;" href="{% url 'usuario:editar-hincha' object.pk %}" >Editar </a> |
+        {%else%}
+            <a style="color:#5ec5ff" href="{% url 'usuario:editar-dirigente' object.pk %}" >Editar</a> |
+        {%endif%}   
+        <a style="color:green" href="{% url 'perfil:password_change' %}" >Cambiar contraseña</a> | 
+        <a style="color:red" href="{% url 'perfil:pre-desactivar' object.pk %}" >Desactivar cuenta</a> |
+        <a style="color:#212529" href="{% url 'usuario:ayuda' %}" >Ayuda</a>
+        
+        </br>
+        </br>
+        
+        <p><strong>Nombre:</strong> {{ object.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ object.apellido }}</p>
+        <p><strong>Correo electrónico:</strong> {{ object.email }}</p>
+        {%if object.es_hincha %}
+            <p><strong>Equipos</strong> 
+            {%for equipo in object.get_equipos%}
+                <span class="badge text-bg-info">{{equipo}}</span>
+            {%endfor%}
+        {%else%}
+            <p><strong>Equipo:</strong> {{ object.equipo }}</p>
+        {%endif%}
+        </p>
+        
+    </div>
+    {% include 'conf/volver.html' %}
+    
+ 
+{% endblock %}
