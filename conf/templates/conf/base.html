@@ -1,0 +1,150 @@
+{% load static %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+            <title>{% block title %}{% endblock %} - PROGDS - APP VULNERABLE</title>
+            <meta charset="utf-8" />
+            <link rel="icon" type="image/x-icon" href="{% static 'conf/img/favicon.ico' %}">
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" type="text/css" href="{% static 'conf/css/base_custom.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'conf/css/forms.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}">
+            <script src="{% url 'js-catlog' %}"></script>
+            {% comment %}  
+                <script src="{% static 'conf/js/DateTimeShortcuts.js' %}" ></script>
+            {% endcomment %}
+            <script type="text/javascript" src="{% static 'admin/js/core.js' %}"></script>
+            
+     </head>
+     <body class="d-flex flex-column">
+        <div style="background-color:#ff6961;height: 35px" >
+            <p class="d-block pt-2 text-center text-bold text-white old-bv">Prototipo Vulnerable</p>
+        </div>
+        <div class="container-flex">
+	       {% block app_menu %}
+	       <nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Main navigation">
+			  <div class="container-fluid">
+			    <a class="navbar-brand" href="{% url 'demo:index' %}">
+			    <img style="width: 130px;" src="{% static 'conf/img/logo.png' %}" class="card-img-top" alt="...">
+			    </a>
+			    <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+			      <span class="navbar-toggler-icon"></span>
+			    </button>
+			
+			    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			        {%if user.persona%}
+			        <li class="nav-item">
+			          <a class="nav-link active" aria-current="page" href="{% url 'usuario:detalle' user.persona.pk %}">Mi cuenta</a>
+			        </li>
+			        {%endif%}
+			         <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="{% url 'campeonato:fixture' %}">Calendario</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="{% url 'campeonato:tabla-de-posiciones' %}">Tabla de posiciones</a>
+                    </li>
+                     <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="{% url 'campeonato:tabla-de-goleadores' %}">Tabla de goleadores</a>
+                    </li>
+			      
+			        
+			        {% if user.is_superuser or  perms.perfil.ver_menu_admin %} 
+			        <li class="nav-item dropdown">
+			            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+			            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+			                {%if perms.perfil.crear_jugadores_desde_archivo %}
+			                    <li><a class="dropdown-item" href="{% url 'equipo:crear-jugador-archivo'  %}">Cargar jugadores desde excel</a></li>
+                            {%endif%}
+                            {%if perms.perfil.eliminar_jugadores_de_forma_masiva %}
+                                <li><a class="dropdown-item" href="{% url 'equipo:pre-eliminar-jugadores-masivo'  %}">Eliminar datos de partidos y jugadores</a></li>
+                            {%endif%}
+                            {%if perms.equipo.add_equipo %}
+                                <li><a class="dropdown-item" href="{% url 'equipo:equipo-crear'  %}">Crear equipo</a></li>
+                            {%endif%}
+                            {%if perms.perfil.generar_fixtur %}
+                                <li><a class="dropdown-item" href="{% url 'campeonato:generar-fixture'  %}">Generar calendario</a></li>
+			                {%endif%}
+			            </ul>
+			        </li>
+			        {%endif%}
+			      </ul>
+			     <span class="navbar-text">
+                    <form class="d-flex">
+                     {% block login_logout %}
+                        {% if not user.is_authenticated %}    
+                            <a href="{% url 'login' %}" >Ingresar</a>  
+                        {%else%}
+                            <span style="color:#67fca5;margin-right:10px;">Bienvenido/a 
+                             <b>{{user}} </b> 
+                             <i style="font-size: 10px;color: #ebeb56;">
+                                {%if user.persona.es_hincha%}
+                                    Hincha
+                                {%else%}
+                                    Dirigente
+                                {%endif%}
+                            </i>
+                            {%if user.is_superuser %}
+                                <i style="color: #ebeb56;" class="fa fa-star"></i>                            
+                            {%endif%}  
+                            <a style="margin-left:20px;font-weight: bold;font-size: 14px;" href="{% url 'perfil:logout' %}">Cerrar sesión</a> 
+                            </span>                                                
+                        {%endif%}
+                    {% endblock %}
+                    </form>
+                  </span>
+			    </div>
+			  </div>
+			</nav>
+
+	    {% endblock %}
+	
+	     <div class="container-flex">
+            {% if messages %}                                           
+                {%include 'conf/messages.html'%}
+            {% endif %}                     
+		    <div role="main">
+	            <h1 id="titulo-barra" class="titulo-barra">  
+	            {% block titulo_template %}     {%endblock%}
+	            </h1>      
+	            
+	           
+	            <main role="main">
+	                <div class="container">
+				        <div class="row">
+					        {% block content %}
+					        {% endblock %}
+				        </div>
+				    </div>
+			    </main>     
+			    
+		      </div>
+	    </div>
+	    
+	
+	    {% block footer %}
+	        <footer class="footer mt-auto py-1 bg-light text-center">
+		        <div class="text-center">  
+                    <a href="#top" class="backtotop "><i class="fa fa-arrow-up"></i> Ir al inicio</a>
+                </div>
+		      
+	        </footer>
+	    {% endblock %}
+	   </div>
+	</body>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+        <script src="{% static 'conf/js/funciones_custom.js' %}" ></script>
+
+   
+    {% block js %}
+       
+    
+    
+    {% endblock %}
+</html>

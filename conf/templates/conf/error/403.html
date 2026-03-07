@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    
+    <title>Página no encontrada</title>
+    <style>
+        body {
+            background-color: #f3f3f3;
+        }
+        .container {
+            text-align: center;
+            padding: 100px;
+        }
+        h1 {
+            font-size: 35px;
+            color: #ff5733;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img style="width:35%" src="{% static 'conf/img/logo.png' %}" class="card-img-top" alt="...">
+        
+        <h1>403 - Prohibido</h1>
+        </br>
+        </br>
+        
+        <p>Acceso denegado - No contás con los permisos para acceder.</p>
+        </br></br>
+        <p>Un error 403 puede referir a una falla de seguridad al revelar la existencia del punto de acceso.</p>
+        {%if exception%}
+            <p>{{exception}}</p>
+        {%endif%}
+        <input class="btn btn-dark" type="button" onclick="window.history.back()" value="Volver" name="volver" /> 
+    </div>
+</body>
+</html>

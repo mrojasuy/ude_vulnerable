@@ -1,0 +1,33 @@
+
+
+.calendarbox .calendarnav-next-year, .calendarbox .calendarnav-previous-year  {
+    display: block;
+    position: absolute;
+    top: 7px;
+    width: 20px;
+    height: 15px;
+    text-indent: -9999px;
+    padding: 0;
+}
+
+.calendarnav-previous {
+    left: 40px;
+    background: url(../img/calendar-icons.svg) 0 0 no-repeat;
+}
+
+.calendarnav-previous-year {
+    left: 10px;
+    background: url(../img/calendar-icons-prev-year.svg) 0 0 no-repeat;
+}
+
+.calendarnav-next {
+    right: 40px;
+    background: url(../img/calendar-icons.svg) 0 -30px no-repeat;
+}
+
+.calendarnav-next-year {
+    right: 10px;
+    background: url(../img/calendar-icons-next-year.svg) 0 0 no-repeat;
+}
+
+

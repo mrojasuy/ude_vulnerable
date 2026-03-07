@@ -1,0 +1,46 @@
+{% extends "conf/base.html" %}
+{% load i18n %}
+{% block title %} 
+    {%if titulo_modelo%}
+       {{ titulo_modelo }} 
+        
+    {%endif%}
+{% endblock %} 
+
+{% block titulo_template %} 
+    {%if titulo_modelo%}
+	   {{ titulo_modelo }} 
+	    
+	{%endif%}
+{% endblock %} 
+{% block content %}		
+	<form method="post" enctype="multipart/form-data">{% csrf_token %}					 	
+		{%include 'conf/form_as_table_with_table_3.html'%}
+	    {% include 'conf/cancelar_confirmar.html' %}
+	</form>
+{%endblock%}	
+
+{% block js %}     
+    <script>
+        AgregarAyudaAElementoSoloTexto(
+            "id_escudo", 
+            "LFI", 
+            "Permite subir ficheros sin control alguno de extensión o tamaño lo que podría habilitar un ataque del tipo LFI.",
+            true);
+        
+        AgregarAyudaAElementoSoloTexto(
+            "id_escudo", 
+            "DoS", 
+            "Permite subir ficheros sin control alguno de tamaño, esto en forma masiva y con archivos de gran tamaño puede llevar a saturar al servidor haciendo que no pueda atender las solicitudes reales.",
+            true
+            );
+        
+        AgregarAyudaAElementoSoloTexto(
+            "id_historia", 
+            "XSS", 
+            "Permite realizar ataques de tipo XSS. Opciones de ataque: 1) Dentro de los tags script escribir lo siguiente: alert(document.cookie) | 2) Dentro de la etiqueta style escribir lo siguiente: body { background-color: #DBF9FC;}",
+            true
+        );  
+        </script>
+{%endblock%}
+

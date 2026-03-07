@@ -1,0 +1,46 @@
+{% extends 'conf/base.html' %}
+{% load static %}
+{% block title %}Listado de equipos registrados{% endblock %}
+{% block titulo_template %}Listado de equipos registrados
+    <span id="auto_lg"></span>
+{% endblock %}
+
+{% block content %}
+    
+    {%for equipo in equipos%}
+        <div class="col-md-3 mb-3">
+            <div class="card">
+                {%if equipo.escudo%}
+                    <img class="mx-auto" style="max-width: 150px; max-height: 250px;" src="{{equipo.escudo.url}}" class="card-img-top" alt="{{equipo.nombre}}">
+                {%else %}
+                    <img class="mx-auto card-img-top" style="max-width: 150px;" src="{% static 'conf/img/sin_imagen_disponible.png' %}"  alt="...">
+                {%endif%}
+                <div class="card-body" style="text-align:center">
+                    <h5 style="background: #c5ffc7;border-radius: 2px;    font-size: 15px;" >
+	                    {%if equipo.es_uruguay%}
+	                        <img style="max-width: 30px;margin: 5px;" src="{% static 'conf/img/uruguay.png' %}" class="card-img-top" alt="...">
+	                    {%else %}
+	                        <img style="max-width: 30px;margin: 5px;" src="{% static 'conf/img/argentina.png' %}" class="card-img-top" alt="...">
+	                    {%endif%}
+                        {{equipo.nombre}}
+                    </h5>
+                    <p class="card-text">Fundado el: {{equipo.fecha_fundado|date:"SHORT_DATE_FORMAT"|default:"sin fecha"}}</p>
+                    <p class="card-text">Pts.: {{equipo.obtener_puntos|default:"0"}}</p>
+                    
+                    <a href="{% url 'equipo:equipo-detalle' equipo.pk %}" class="btn btn-primary mt-2">¡Conocé más!</a>
+                </div>
+            </div>
+        </div>
+    {%endfor%}    
+{% endblock %}
+
+{% block js %}
+<script>
+    AgregarAyudaAElementoSoloTexto(
+        "auto_lg", 
+        "Auto-logout", 
+        "No realiza cierre automático de sesión pasado cierto período de tiempo.",
+        false
+    );
+</script>
+{% endblock %}

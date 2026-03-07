@@ -1,0 +1,176 @@
+{% extends 'conf/base.html' %}
+{% load static %}
+{% block title %}Calendario de los partidos {% endblock %}
+{% block titulo_template %}Calendario de los partidos {% endblock %}
+
+
+{% block content %}
+    <p style="    font-size: 30px;
+    color: black; text-align: center;">
+    <i class="fa fa-trophy"></i>    Trofeo PROGDS 2023-2024
+    </p>
+   
+    <p style="    background-color: #77ddfc;padding: 10px;text-align: center;font-weight: 500;">PRÓXIMA FECHA - {{proxima_fecha|date:"SHORT_DATE_FORMAT"}}</p>
+    <table style="margin-bottom:10px;margin-top:10px">
+      <thead>
+        <tr>
+            <th>Equipo local</th>
+            <th>Equipo visitante</th>
+            <th>Hora</th>
+            <th style="text-align:right">Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for partido in proximos_partidos %}
+            <tr>
+                <td {% if partido.equipo_local.pk in equipos_usuario_logueado %}
+                        style="font-weight: bold;"
+                    {%endif%}
+                >
+                    {%if partido.equipo_local.escudo%}
+                        <img class="mx-auto" style="max-width: 15px;
+    max-height: 250px;" src="{{partido.equipo_local.escudo.url}}" class="card-img-top" alt="{{partido.equipo_local.nombre}}">
+                     {%else %}
+                        <img class="mx-auto card-img-top" style="max-width: 15px;" src="{% static 'conf/img/sin_imagen_disponible.png' %}"  alt="...">
+                    {%endif%}
+                {{ partido.equipo_local }} 
+                    {%if partido.goles_local > 0%}
+                        <br>
+                        <span style="font-size:10px;">
+                        <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                        {%for gol in partido.obtener_goles_equipo_local %}
+                            {{gol}}
+                        {%endfor%}
+                        </span>
+                    {%endif%}
+                 </td>
+                <td {% if partido.equipo_visitante.pk in equipos_usuario_logueado %}
+                        style="font-weight: bold;"
+                    {%endif%}
+                >
+                    {%if partido.equipo_visitante.escudo%}
+                        <img class="mx-auto" style="max-width: 15px;
+    max-height: 250px;" src="{{partido.equipo_visitante.escudo.url}}" class="card-img-top" alt="{{partido.equipo_visitante.nombre}}">
+                     {%else %}
+                        <img class="mx-auto card-img-top" style="max-width: 15px;" src="{% static 'conf/img/sin_imagen_disponible.png' %}"  alt="...">
+                    {%endif%}
+                {{ partido.equipo_visitante }}
+                    {%if partido.goles_visitante > 0%}
+                        <br>
+                        <span style="font-size:10px;">
+                        <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                        {%for gol in partido.obtener_goles_equipo_visitante %}
+                            {{gol}}
+                        {%endfor%}
+                        </span>
+                    {%endif%}
+                
+                </td>
+                <td>{{ partido.fecha|date:"H:i" }}</td>
+                <td style="text-align:right" >{{ partido.get_resultado }}</td>
+                {% if not partido.ya_jugado%}
+                    {% if partido.se_puede_jugar %}
+                    <td>
+                        {% if perms.campeonato.simular_partido %}         
+                            <a href={% url 'campeonato:partido-jugar' partido.pk %}>
+                                <span style="background: #c6ff84;padding: 2px;border-radius: 5px;">Jugar partido<span>
+ 
+                            </a>
+                        {% endif %}
+                    </td>
+                    {%endif%}
+                {%endif%}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  
+  
+   
+   
+  {% for fecha, partidos in partidos_agrupados.items %}
+    {%if fecha < fecha_actual%}
+        <p style="background-color:#adb5bd;margin-top:10px">{{ fecha }} - FECHA TERMINADA</p>
+    {%else%}
+        <p style="background-color:#fcee77;margin-top:10px">{{ fecha }}</p>
+    {%endif%}
+    <table style="margin-bottom:10px">
+      <thead>
+        <tr>
+            <th>Equipo local</th>
+            <th>Equipo visitante</th>
+            <th>Hora</th>
+            <th style="text-align:right">Resultado</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for partido in partidos %}
+          <tr>
+            <td 
+                {% if partido.equipo_local.pk in equipos_usuario_logueado %}
+                    style="font-weight: bold;"
+                {%endif%}
+                >
+                {%if partido.equipo_local.escudo%}
+                    <img class="mx-auto" style="max-width: 15px;
+max-height: 250px;" src="{{partido.equipo_local.escudo.url}}" class="card-img-top" alt="{{partido.equipo_local.nombre}}">
+                 {%else %}
+                    <img class="mx-auto card-img-top" style="max-width: 15px;" src="{% static 'conf/img/sin_imagen_disponible.png' %}"  alt="...">
+                {%endif%}
+                
+               
+                {{ partido.equipo_local }}
+                  
+                {%if partido.goles_local > 0%}
+                    <br>
+                    <span style="font-size:10px;">
+                    <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                    {%for gol in partido.obtener_goles_equipo_local %}
+                        {{gol}}
+                    {%endfor%}
+                    </span>
+                {%endif%}
+             </td>
+            <td {% if partido.equipo_visitante.pk in equipos_usuario_logueado %}
+                        style="font-weight: bold;"
+                    {%endif%}
+                >
+                {%if partido.equipo_visitante.escudo%}
+                    <img class="mx-auto" style="max-width: 15px;
+max-height: 250px;" src="{{partido.equipo_visitante.escudo.url}}" class="card-img-top" alt="{{partido.equipo_visitante.nombre}}">
+                 {%else %}
+                    <img class="mx-auto card-img-top" style="max-width: 15px;" src="{% static 'conf/img/sin_imagen_disponible.png' %}"  alt="...">
+                {%endif%}
+            {{ partido.equipo_visitante }}
+                {%if partido.goles_visitante > 0%}
+                    <br>
+                    <span style="font-size:10px;">
+                    <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                    {%for gol in partido.obtener_goles_equipo_visitante %}
+                        {{gol}}
+                    {%endfor%}
+                    </span>
+                {%endif%}
+            
+            </td>
+            <td>{{ partido.fecha|date:"H:i" }}</td>
+            <td style="text-align:right">{{ partido.get_resultado }}</td>
+            {% if not partido.ya_jugado %}
+                {% if partido.se_puede_jugar %}
+                <td>
+                    {% if perms.campeonato.simular_partido %}         
+                        <a href={% url 'campeonato:partido-jugar' partido.pk %}>
+                            <span style="background: #c6ff84;padding: 2px;border-radius: 5px;">Jugar partido<span>
+                        </a>
+                    {% endif %}
+                </td>
+                {% endif %}
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endfor %}
+{% endblock %}
+  
+  

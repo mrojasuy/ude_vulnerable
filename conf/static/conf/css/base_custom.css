@@ -1,0 +1,332 @@
+label.required {
+    font-weight: bold;
+    
+}
+
+.required input, select {
+    background-color: #faf8b8; /* Cambia este color según tus preferencias */
+}
+
+.alert{
+    /*padding: px !important;*/
+}
+a {
+  text-decoration: none;
+  font-size:15px;
+  color:#113F6C
+}
+
+p{
+    font-size:15px;
+}
+
+.fa-trash{
+    color: #ff574b !important
+}
+
+.fa-edit{
+    color: #b1880e !important
+}
+
+div.pie{
+    text-align: center;
+}
+
+p.titulo-detalle-resultado{
+    padding: 5px 5px;
+    background: #fdf6bc;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    text-align: left;
+    overflow: hidden;
+    margin-bottom: 10px;
+    height: 30px;
+    
+}
+
+
+/* CONTENEDOR PARA TITULOS */
+h1.contenedor-titulo
+ {
+    padding: 5px 5px;
+    background: #417690;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    text-align: left;
+    overflow: hidden;
+    margin-bottom: 10px;
+    height: 30px;
+    
+}
+
+h1.titulo-barra{
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    background: #e0e0e0;
+    color: black;
+    font-weight:bold;
+}
+
+h1.titulo-barra{
+        margin: 0 0 20px;
+    font-weight: 300;
+    font-size: 1.25rem;
+    color: var(--body-quiet-color);
+} 
+
+h1{
+            margin: 0 0 20px;
+    font-weight: 300;
+    font-size: 1.25rem;
+    color: var(--body-quiet-color);
+}
+div.titulo-h3{color: #f5dd5d;}
+div.titulo-h2{color: #f5dd5d;}
+/*** FIN CONTENEDOR PARA TITULOS ****/
+
+/* FORM DEFAULTS 
+
+input, textarea, select, .form-row p, form .button {
+    margin: 2px 0;
+    padding: 2px 3px;
+    vertical-align: middle;
+    /* font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;*/
+    font-weight: normal;
+    font-size: 13px;
+}
+.form-row div.help {
+    padding: 2px 3px;
+}
+
+textarea {
+    vertical-align: top;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=url],
+input[type=number], input[type=tel], textarea, select, .vTextField {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 6px;
+    margin-top: 0;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus,
+input[type=url]:focus, input[type=number]:focus, input[type=tel]:focus,
+textarea:focus, select:focus, .vTextField:focus {
+    border-color: #999;
+}
+
+select {
+    height: 30px;
+}
+
+select[multiple] {
+    /* Allow HTML size attribute to override the height in the rule above. */
+    height: auto;
+    min-height: 142px;
+}
+
+
+
+/* MODULES */
+
+.module {
+    border: none;
+    margin-bottom: 30px;
+    background: #fff;
+}
+
+.module p, .module ul, .module h3, .module h4, .module dl, .module pre {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.module blockquote {
+    margin-left: 12px;
+}
+
+.module ul, .module ol {
+    margin-left: 1.5em;
+}
+
+.module h3 {
+    margin-top: .6em;
+}
+
+.module h2, .module caption, .inline-group h2 {
+    margin: 0;
+    padding: 8px;
+    font-weight: 400;
+    font-size: 13px;
+    text-align: left;
+    background: #79aec8;
+    color: #fff;
+}
+
+.module caption,
+.inline-group h2 {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.module table {
+    border-collapse: collapse;
+}
+
+/* MESSAGES & ERRORS */
+
+ul.messagelist {
+    padding: 0;
+    margin: 0;
+}
+
+ul.messagelist li {
+    display: block;
+    font-weight: 900;
+    font-size: 13px;
+    padding: 10px 10px 10px 65px;
+    margin: 0 0 10px 0;
+    background: #dfd url(/conf/img/icon-yes.svg) 40px 12px no-repeat;
+    background-size: 16px auto;
+    color: #333;
+}
+
+ul.messagelist li.warning {
+    background: #ffc url(../img/icon-alert.svg) 40px 14px no-repeat;
+    background-size: 14px auto;
+}
+
+ul.messagelist li.error {
+    background: #ffefef url(../img/icon-no.svg) 40px 12px no-repeat;
+    background-size: 16px auto;
+}
+
+.errornote {
+    font-size: 14px;
+    font-weight: 700;
+    display: block;
+    padding: 10px 12px;
+    margin: 0 0 10px 0;
+    color: #ba2121;
+    border: 1px solid #ba2121;
+    border-radius: 4px;
+    background-color: #fff;
+    background-position: 5px 12px;
+}
+
+ul.errorlist {
+    margin: 0 0 4px;
+    padding: 0px !important;
+    color: #ba2121;
+    background: #fff;
+}
+
+ul.errorlist li {
+    font-size: 13px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+ul.errorlist li:first-child {
+    margin-top: 0;
+}
+
+ul.errorlist li a {
+    color: inherit;
+    text-decoration: underline;
+}
+
+td ul.errorlist {
+    margin: 0;
+    padding: 0;
+}
+
+td ul.errorlist li {
+    margin: 0;
+}
+
+.form-row.errors {
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #eee;
+    background: none;
+}
+
+.form-row.errors ul.errorlist li {
+    padding-left: 0;
+}
+
+.errors input, .errors select, .errors textarea {
+    border: 1px solid #ba2121;
+}
+
+div.system-message {
+    background: #ffc;
+    margin: 10px;
+    padding: 6px 8px;
+    font-size: .8em;
+}
+
+div.system-message p.system-message-title {
+    padding: 4px 5px 4px 25px;
+    margin: 0;
+    color: #c11;
+    background: #ffefef url(../img/icon-no.svg) 5px 5px no-repeat;
+}
+
+.description {
+    font-size: 12px;
+    padding: 5px 0 0 12px;
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: 1.25rem 1rem;
+}
+
+#custom-table {
+  /*font-family: Arial, Helvetica, sans-serif;*/
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#custom-table td, #custom-table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#custom-table tr:nth-child(even){background-color: #f2f2f2;}
+
+#custom-table tr:hover {background-color: #ddd;}
+
+#custom-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+}
+
+.aviso_vulnerabilidad_badge {
+    font-weight:100 !important;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.aviso_vulnerabilidad_info {
+    color:#faff82;
+    margin-left:5px;
+}
+
+.fa-times{
+    margin-right: 5px;
+}
+}
+
+

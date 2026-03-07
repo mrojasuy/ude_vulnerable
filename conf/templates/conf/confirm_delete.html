@@ -1,0 +1,41 @@
+{% extends "conf/base.html" %}
+{% block title %}Eliminar Registro{% endblock %}
+{% block titulo_template %}Eliminar Registro{% endblock %}
+
+
+{% block content %}
+<div class="contenedor"> 
+          
+			    
+	       		    		   	    
+	    <form action="" method="post">{% csrf_token %}		
+
+	        {%if protected%}
+	            <h1>No se puede eliminar {{ model_name }}</h1>
+	            
+	            <p>La eliminación de {{ model_name }} seleccionado requeriría el borrado de los siguientes objetos protegidos relacionados:</p>
+	            {% for item in protected %}
+                    <input type="hidden" value="{{ item.id }}" name="itemsToDelete" />
+                    <li style="padding-left: 30px;"><a href="{{item.get_absolute_url}}">{{ item }}</a></li>
+                {% endfor %}
+	        {%else%}
+	        
+	            <h1>Eliminar registro</h1>
+                <p class="mensajes_detalle">¿Est&aacute; usted seguro de que desea eliminar el registro "<b>{{ object|slice:":128" }}</b>" ?</p>
+				<p>
+				  <ul>
+				    {{ deletable_objects|unordered_list }}
+				  </ul>
+				</p>
+		    {%endif%}	
+		    <div class="submit-row">      		                        
+                <a class="btn btn-danger" onclick="goBack()" href="#">No, llévame atrás</a>
+                {%if not protected%}         
+                    <input class="btn btn-success" type="submit" value="Si, estoy seguro"></input>
+                {%endif%}
+                </div>			
+	    </form>			
+			
+</div>	
+
+{% endblock %}

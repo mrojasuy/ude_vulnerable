@@ -1,0 +1,23 @@
+{{ form.media }}
+<div>
+    <fieldset class="module aligned ">
+        {% for field in form %} 
+            {% if not field.is_hidden %}
+                <div class="form-row {% if field.field.required %} required{% endif %}"> 
+                        <label
+                            {% if field.field.required %} class="required" style="width:150px"{% endif %}
+                        >
+                            {{ field.label_tag }}
+                        </label>
+                        
+                        {{ field.errors|escape }} {{ field }}
+                        <div class="help"> {{ field.help_text|safe }}</div>
+                    
+                </div>
+            {% else %}
+                {{ field }}
+            {% endif %}    
+        {% endfor %}
+    </fieldset>
+</div>
+

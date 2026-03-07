@@ -1,0 +1,47 @@
+{{ form.media }}
+<div style="display: flex; flex-wrap: wrap;">
+    <fieldset class="module aligned" style="flex: 1; margin-right: 20px;">
+        {% for field in form.visible_fields|slice:":6" %}
+            <div class="form-row {% if field.field.required %} required{% endif %}">
+                <div style="text-align: left">
+                   <label
+                        {% if field.field.required %} class="required" {% endif %} style="width:150px"
+                    >
+                        {{ field.label_tag }}
+                    </label>
+                </div>
+                <div>
+                    {{ field.errors|escape }} {{ field }}
+                    <div class="help"> {{ field.help_text|safe }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </fieldset>
+
+    <fieldset class="module aligned" style="flex: 1;">
+        {% for field in form.visible_fields|slice:"6:" %}
+            <div class="form-row">
+                <div style="text-align: left; width: 150px; ">
+                    {{ field.label_tag }}
+                </div>
+                <div>
+                    {{ field.errors|escape }} {{ field }}
+                    <div class="help"> {{ field.help_text|safe }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </fieldset>
+</div>
+
+{% comment %}  
+    <table class="formulario"  border="0" cellpadding="0" cellspacing="1" align="center" style="width:100%;text-align:left;">
+{% for field in form %}	
+	 
+	<tr>   
+    	<td class="{% if tdclass%}{{ tdclass }}{%else%}formfieldleft{% endif %}">{{ field.label_tag }}</td>
+    	<td class="formfieldright">{{ field.errors|escape }} {{ field }} </br> {{ field.help_text|safe }}</td>	                
+	</tr>
+ 
+{% endfor %}
+</table>
+{% endcomment %}

@@ -1,0 +1,28 @@
+{% extends 'conf/base.html' %}
+{% block title %}Tabla de posiciones{% endblock %}
+{% block titulo_template %}Tabla de posiciones{% endblock %}
+
+{% block content %}
+    <p style="    font-size: 30px;
+    color: black; text-align: center;">
+    <i class="fa fa-trophy"></i>    Trofeo PROGDS 2023-2024
+    </p>
+    <div style="max-height: 350px; overflow-y: auto;">
+        <table class="table table-striped" style="font-size: 15px;">
+            <thead>
+                <tr>
+                    <th scope="col">Equipo</th>
+                    <th scope="col">Puntos</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in tabla_posiciones %}
+                    <tr>
+                        <td>{{ item.equipo}}</td>
+                        <td>{{ item.puntaje }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+     </div>
+{% endblock %}
